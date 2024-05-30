@@ -58,7 +58,7 @@ const ChatbotButton = styled.button`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
-const App = () => {
+const Temp = () => {
   const [results, setResults] = useState([]);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
@@ -164,4 +164,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Temp;

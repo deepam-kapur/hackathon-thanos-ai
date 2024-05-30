@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import logo from '../hr-logo.svg';
 const HeaderWrapper = styled.header`
   background: black;
   color: white;
@@ -11,8 +11,9 @@ const HeaderWrapper = styled.header`
 
 const Header = () => {
   return (
-    <HeaderWrapper>
-      <h1>Thanos AI </h1>
+    <HeaderWrapper style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <img src={logo} style={{ marginRight: '1rem', marginLeft:'50px' }}/>
+      <h1 style={{ margin: '0 auto' }}>Thanos AI</h1>
     </HeaderWrapper>
   );
 };
