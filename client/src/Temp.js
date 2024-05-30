@@ -59,6 +59,7 @@ const ChatbotButton = styled.button`
 `;
 
 const Temp = () => {
+  const [data,setData] = useState([]);
   const [results, setResults] = useState([]);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
@@ -67,18 +68,20 @@ const Temp = () => {
     setisLoading(true);
     // setResults(["Streaming data..."]);
     setIsStreaming(true);
-
+      // if data is not null, pass the thread to the api call..
+      // else, pass the query to the api call
     try {
       const response = await fetch("http://192.168.3.189:9000/query", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: query }),
+        body: JSON.stringify({ threadId: data?.threadId, question: query }),
       });
-      const data = await response.json();
-      console.log(data);
-      const { data: responseData, files } = data.response;
+      const res = await response.json();
+      console.log(res);
+      setData(res);
+      const { data: responseData, files } = res.response;
 
       const formattedResults = [
         <React.Fragment key="main">
@@ -140,7 +143,7 @@ const Temp = () => {
       <FixedHeader />
       <ContentWrapper>
         <SearchBar onSearch={handleSearch} />
-        <ExampleQuestions />
+        {/* <ExampleQuestions /> */}
         {loading ? (
           <Loader />
         ) : (

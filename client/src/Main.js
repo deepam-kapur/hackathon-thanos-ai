@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import ExampleQuestions from "./components/ExampleQuestions";
 import Chatbot from "./components/Chatbot";
 import Loader from "./components/Loader";
+import { query } from "express";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -58,17 +59,20 @@ const ChatbotButton = styled.button`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
-const App = () => {
-  const [data, setData] = useState([]);
+const Temp = () => {
+  const [data,setData] = useState([]);
   const [results, setResults] = useState([]);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
   const [loading, setisLoading] = useState(false);
+  const [isFirst, setIsFirst] = useState(true);
+
   const handleSearch = async (query) => {
     setisLoading(true);
     // setResults(["Streaming data..."]);
     setIsStreaming(true);
-
+      // if data is not null, pass the thread to the api call..
+      // else, pass the query to the api call
     try {
       const response = await fetch("http://192.168.3.189:9000/query", {
         method: "POST",
@@ -110,6 +114,7 @@ const App = () => {
       setResults(formattedResults);
       setIsStreaming(false);
       setisLoading(false);
+      setIsFirst(false);
     } catch (error) {
       setResults([`Error: ${error.message}`]);
       setIsStreaming(false);
@@ -141,12 +146,13 @@ const App = () => {
     <AppWrapper>
       <FixedHeader />
       <ContentWrapper>
-        <SearchBar onSearch={handleSearch} />
-        <ExampleQuestions />
+        {isFirst && <SearchBar onSearch={handleSearch} />}
+        {/* <ExampleQuestions /> */}
         {loading ? (
           <Loader />
         ) : (
           <>
+          
             <Results
               results={results}
               onRemove={handleRemove}
@@ -157,6 +163,8 @@ const App = () => {
         )}
       </ContentWrapper>
 
+      {!isFirst && <SearchBar onSearch={handleSearch} />}
+
       <FixedFooter />
       {isChatbotOpen && <Chatbot onClose={toggleChatbot} />}
       {/* <ChatbotButton onClick={toggleChatbot}>
@@ -166,4 +174,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Temp;
