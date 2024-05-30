@@ -5,9 +5,10 @@ import fs from 'fs';
 import path from 'path';
 import OpenAI from "openai";
 
-const ASSISTANT_ID = 'asst_WZ6KnbeIVlKxBaqQeH1K0b07';
+const OPENAPI_KEY = process.env.OPENAPI_KEY;
+const ASSISTANT_ID = 'asst_TmdA3RxTazR2pjKX08mTHjeq';
 
-const openai = new OpenAI({ apiKey: API_KEY, });
+const openai = new OpenAI({ apiKey: OPENAPI_KEY, });
 
 const getFileURL = (file) => {
     const folderPath = './train-data/';
@@ -74,9 +75,9 @@ const getAssistant = async (...vectorStoreIds) => {
       name: "Hackerrank Knowledge Base Assistant",
       instructions: `You are expert on hackerrank's platform queries that a person asks generally. Use the knowledge base I am going to provide in json files format
       to answer questions about anything that I am going to ask. The json file format contains two keys one is url and other one is body. So the body is in html so 
-      process that body and try to give us the results in the normal text. You are bounded by the knowledge base only. Answer the queries only in the scope of the vector store 
-      knowledge base I am providing you. Don't go beyon or overwrite that because that is the most updated knowledge base we have. The output should be in normal text format.
-      Don't add any syntaxes like markdown, bold, format or do anything just return output in simple html with next line as separate divs`,
+      process that body. You are bounded by the knowledge base only. Answer the queries only in the scope of the vector store knowledge base I am providing you. 
+      Don't go beyond or overwrite that because that is the most updated knowledge base we have. 
+      Important: The output should be in html format starting form div tag not html tag so that i can render response directly to the website.`,
       model: "gpt-4o",
       tools: [{ type: "file_search" }],
     });
@@ -138,7 +139,7 @@ const queryAssistant = async (question, threadId) => {
     threadId,
     {
         role: "user",
-        content: question,
+        content: question + '  Output - The output should be in html format starting form div tag not html tag.',
     }
   );
   
@@ -198,7 +199,7 @@ const queryAssistant = async (question, threadId) => {
 (async () => {
     // await createArticlesJSON();
     // await createVectorStore();
-    // await getAssistant('vs_yp8mZiNlgcF8kAmZwmjRYRza');
+    await getAssistant('vs_yp8mZiNlgcF8kAmZwmjRYRza');
     // await queryAssistant('asst_QsQWuMLVEoRad9xhowBDvO4t', 'What is Email Alerts for Question Leakage?');
 })();
 

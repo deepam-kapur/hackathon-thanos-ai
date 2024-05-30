@@ -38,12 +38,12 @@ const QuestionText = styled.div`
 
 const ExampleQuestions = () => {
   const questions = [
-    "How to change Owner of a Question",
-    "How to Duplicate a Question to the test",
-    "How to add remove tags from multiple questions using scripts",
-    "How to see Library ID of a question",
+    "How to duplicate a question in HRW?",
+    "Do you have Azure AD?",
+    "How to delete candidate data in bulk?",
+    "What is harvest key?",
     "How to import questions in bulk",
-    "How to create a custom question template"
+    "How to create a test?"
   ];
 
   return (

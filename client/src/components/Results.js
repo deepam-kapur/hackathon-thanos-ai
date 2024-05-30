@@ -51,9 +51,9 @@ const Results = ({ results, onRemove, isStreaming, streamData }) => {
     <ResultsWrapper>
       {results.map((result, index) => (
         <ResultItem key={index} ref={index === 0 ? streamingRef : null}>
-          <RemoveButton onClick={() => onRemove(index)}>
+          {/* <RemoveButton onClick={() => onRemove(index)}>
             <FontAwesomeIcon icon={faTimes} />
-          </RemoveButton>
+          </RemoveButton> */}
           {result}
         </ResultItem>
       ))}

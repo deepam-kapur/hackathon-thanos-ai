@@ -142,7 +142,6 @@ const App = () => {
       <FixedHeader />
       <ContentWrapper>
         <SearchBar onSearch={handleSearch} />
-        <ExampleQuestions />
         {loading ? (
           <Loader />
         ) : (
@@ -155,6 +154,7 @@ const App = () => {
             />
           </>
         )}
+         <ExampleQuestions />
       </ContentWrapper>
 
       <FixedFooter />
