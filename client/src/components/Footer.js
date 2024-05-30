@@ -12,7 +12,7 @@ const FooterWrapper = styled.footer`
 const Footer = () => {
   return (
     <FooterWrapper>
-      <p>&copy; 2024 Your Company</p>
+      <p>&copy; 2024 Thanos AI</p>
     </FooterWrapper>
   );
 };
